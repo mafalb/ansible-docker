@@ -1,0 +1,7 @@
+# vi: set ft=yaml ts=2:
+---
+
+- debug: var=docker
+  tags:
+    - never
+    - debug

@@ -1,0 +1,13 @@
+# vi: set ft=yaml ts=2:
+---
+
+- name: docker daemon does exist
+  package:
+    name: "{{ docker.package }}"
+    state: present
+
+- name: docker service is running
+  service:
+    name: "{{ docker.service }}"
+    state: started
+    enabled: true
