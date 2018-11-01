@@ -5,3 +5,26 @@
   roles:
     - role: docker/daemon
     - role: docker/ansible
+  tasks:
+    - name: get version of docker clientx
+      command: docker version -f {% raw %} "{{ .Client.Version }}" {% endraw %}
+      register: _docker_version
+
+    - name: get version of docker daemon
+      command: docker version -f {% raw %} "{{ .Server.Version }}" {% endraw %}
+      register: _dockerd_version
+
+    - debug: var=_docker_version
+      tags:
+        - never
+        - debug
+
+    - debug: var=_dockerd_version
+      tags:
+        - never
+        - debug
+
+    - name: assert that docker and dockerd versions match
+      assert:
+        that:
+          - _docker_version.stdout == _dockerd_version.stdout
