@@ -1,5 +1,7 @@
+# vi: set ft=yaml ts=2:
 ---
+
 - hosts: localhost
-  remote_user: root
   roles:
-    - docker
+    - role: docker/daemon
+    - role: docker/ansible
