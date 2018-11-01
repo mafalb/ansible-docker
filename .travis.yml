@@ -10,7 +10,7 @@ before_install:
   - sudo apt-add-repository --yes ppa:ansible/ansible-2.7
   - sudo apt-get update
   - sudo apt-get install ansible && sudo mkdir -p /etc/ansible/roles
-  - sudo echo -e "hash_behaviour = merge\n" | sudo tee /etc/ansible/ansible.cfg
+  - sudo echo -e "[defaults]\nhash_behaviour = merge\n" | sudo tee /etc/ansible/ansible.cfg
   - sudo echo -e "localhost ansible_connection=local\n" | sudo tee /etc/ansible/hosts
   - ansible localhost -m setup
   - ansible --version
