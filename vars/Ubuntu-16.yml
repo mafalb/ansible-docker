@@ -1,0 +1,6 @@
+# vi: set ft=yaml ts=2:
+---
+
+docker:
+  ansible:
+    package: python3-docker

@@ -1,0 +1,7 @@
+# vi: set ft=yaml ts=2:
+---
+
+- name: python-docker does exist
+  package:
+    name: "{{ docker.ansible.package }}"
+    state: present

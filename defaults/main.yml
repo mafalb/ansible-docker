@@ -1,6 +1,10 @@
 # vi: set ft=yaml ts=2:
 ---
 
+# on travis-ci we default to docker-ce
+#
+docker_package: "{{ (ansible_env.TRAVIS is defined and ansible_env.TRAVIS == true) | ternary('docker-ce','') }}"
 docker:
-  package: docker.io
   service: docker
+  ansible:
+    package: python-docker

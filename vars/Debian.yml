@@ -1,0 +1,5 @@
+# vi: set ft=yaml ts=2:
+---
+
+docker:
+  package: "{{ (docker_package == '')|ternary('docker.io',docker_package) }}"

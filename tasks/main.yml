@@ -1,6 +1,38 @@
 # vi: set ft=yaml ts=2:
 ---
 
+- name: assertions
+  assert:
+    that:
+      - ansible_distribution in ["CentOS","Ubuntu"]
+
+- name: assertions
+  when: ansible_distribution == "CentOS"
+  assert:
+    that:
+      - ansible_distribution_major_version >= '7'
+
+- name: assertions
+  when: ansible_distribution == "Ubuntu"
+  assert:
+    that:
+      - ansible_distribution_release in ["xenial"]
+
+- debug: var=docker
+  tags:
+    - never
+    - debug
+
+- debug: var=docker_package
+
+- name: set OS distribution specific variables
+  include_vars:
+    file: "{{ ansible_os_family }}.yml"
+
+- name: set OS specific variables
+  include_vars:
+    file: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+
 - debug: var=docker
   tags:
     - never

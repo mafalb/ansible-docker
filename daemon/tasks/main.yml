@@ -1,6 +1,11 @@
 # vi: set ft=yaml ts=2:
 ---
 
+- name: docker-ce repo does exist
+  when: docker.package == "docker-ce"
+  include_tasks:
+    file: docker-ce.yml
+
 - name: docker daemon does exist
   package:
     name: "{{ docker.package }}"
