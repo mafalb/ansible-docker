@@ -2,22 +2,21 @@
 
 ## Basic Usage
 
-### To install the docker daemon
-
 ```
 - hosts: localhost
   roles:
     - role: docker/daemon
 ```
-
-### To configure an ansible node
+to install the docker daemon
 
 ```
 - hosts: localhost
   roles:
     - role: docker/ansible
 ```
-if you want to build docker images on an ansible node to install node requirements for docker.
+to install the requirements for handling docker images or containers on an ansible node
+e.g. [docker_image](https://docs.ansible.com/ansible/latest/modules/docker_container_module.html#docker-container-module) or [docker_container](https://docs.ansible.com/ansible/latest/modules/docker_container_module.html#docker-container-module)
+
 
 ***
 
