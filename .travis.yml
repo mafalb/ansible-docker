@@ -20,3 +20,5 @@ install:
 script:
   - ansible-playbook --become -D tests/test.yml -C -t all,debug
   - ansible-playbook --become -D tests/test.yml    -t all,debug
+after_script:
+  - docker version
