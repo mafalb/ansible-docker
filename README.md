@@ -2,35 +2,26 @@
 
 ## Basic Usage
 
-To install docker:
+
 ```
 - hosts: localhost
   roles:
     - role: docker/daemon
 ```
+to install the docker daemon
 
-If you want to build docker images on an ansible node:
+
 ```
 - hosts: localhost
   roles:
     - role: docker/ansible
 ```
+if you want to build docker images on an ansible node to install node requirements for docker.
 
 ## Variables
 
-```
-docker_package: ''
-```
+At this time there are no variables you can use. All configuration is made by the role itself.
 
-Per default the name of the package to be installed is set automatically per OS. You can override the name of the package manually, e.g. you can force installation of docker-ce instead of the OS docker by setting
-
-```
-docker_package: docker-ce
-```
-
-You don't have to do this if running on travis-CI. The role does detect travis-CI and overrules the default OS docker_package name appropiatly to docker-ce
-
-License
--------
+## License
 
 GPLv3

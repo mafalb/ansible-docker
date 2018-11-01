@@ -2,4 +2,4 @@
 ---
 
 docker:
-  package: "{{ (docker_package == '')|ternary('docker.io',docker_package) }}"
+  package: "docker.io"
