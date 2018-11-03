@@ -3,8 +3,8 @@
 
 - hosts: localhost
   roles:
-    - role: docker/daemon
-    - role: docker/ansible
+    - role: mafalb.docker/daemon
+    - role: mafalb.docker/ansible
   tasks:
     - name: get version of docker clientx
       check_mode: false
