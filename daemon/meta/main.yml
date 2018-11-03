@@ -2,4 +2,4 @@
 ---
 
 dependencies:
-  - role: docker
+  - role: mafalb.docker
