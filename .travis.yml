@@ -16,7 +16,7 @@ before_install:
   - ansible --version
 install:
   - pwd
-  - sudo ln -s $TRAVIS_BUILD_DIR /etc/ansible/roles/docker
+  - sudo ln -s $TRAVIS_BUILD_DIR /etc/ansible/roles/mafalb.docker
 script:
   - ansible-playbook --become -D tests/test.yml -C -t all,debug
   - ansible-playbook --become -D tests/test.yml    -t all,debug
