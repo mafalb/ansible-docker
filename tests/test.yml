@@ -6,6 +6,9 @@
     - role: mafalb.docker/daemon
     - role: mafalb.docker/ansible
   tasks:
+    - name: create image
+      debug: msg="tbd"
+
     - name: get version of docker clientx
       check_mode: false
       command: docker version -f {% raw %} "{{ .Client.Version }}" {% endraw %}

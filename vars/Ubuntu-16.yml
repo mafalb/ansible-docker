@@ -3,4 +3,4 @@
 
 docker:
   ansible:
-    package: python3-docker
+    package: "{{ (ansible_python.version.major|int == 3)|ternary('python3-docker','python-docker') }}"
