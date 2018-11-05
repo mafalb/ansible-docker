@@ -1,5 +1,11 @@
-# vi: set ft=yaml ts=2:
+# vim: set ft=yaml ts=2:
 ---
+
+- name: debug docker
+  debug: var=docker
+  tags:
+    - never
+    - debug
 
 - name: docker-ce repo does exist
   when:
