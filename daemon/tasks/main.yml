@@ -8,11 +8,11 @@
     - debug
 
 - name: docker-ce repo does exist
+  include_tasks:
+    file: docker-ce.yml
   when:
     - docker.package == "docker-ce"
     - not docker.assume_already_installed
-  include_tasks:
-    file: docker-ce.yml
 
 - name: docker daemon does exist
   when: not docker.assume_already_installed
