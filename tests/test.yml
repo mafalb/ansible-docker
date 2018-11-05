@@ -37,12 +37,12 @@
 
     - assert:
       when:
-        - ansible_env.TRAVIS
-        - docker.assume_already_installed
-      that:
+      - ansible_env.TRAVIS
+      - docker.assume_already_installed
+        that:
         - ansible_facts.packages['docker-ce'] is defined
 
     - assert:
       when: not docker.assume_already_installed
-      that:
+        that:
         - ansible_facts.packages[docker.package] is defined
