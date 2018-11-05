@@ -34,3 +34,15 @@
       assert:
         that:
           - _docker_version.stdout == _dockerd_version.stdout
+
+    - assert:
+      when:
+        - ansible_env.TRAVIS
+        - docker.assume_already_installed
+      that:
+        - ansible_facts.packages['docker-ce'] is defined
+
+    - assert:
+      when: not docker.assume_already_installed
+      that:
+        - ansible_facts.packages[docker.package] is defined
