@@ -4,6 +4,7 @@
 - hosts: localhost
   roles:
     - role: mafalb.docker/daemon
+      docker_assume_already_installed: true
     - role: mafalb.docker/ansible
   tasks:
     - name: create image
