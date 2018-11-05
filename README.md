@@ -20,7 +20,10 @@ e.g. [docker_image](https://docs.ansible.com/ansible/latest/modules/docker_conta
 
 ## Variables
 
-At this time there are no variables you can use. All configuration is made by the role itself.
+```
+docker_assume_already_installed: false
+```
+use this to avoid installing docker, e.g. on travis-CI where docker is known to be present in a newer version than the OS provided docker
 
 ## License
 

@@ -4,6 +4,7 @@
 # on travis-ci we default to docker-ce
 #
 docker:
+  assume_already_installed: "{{ docker_assume_already_installed }}|default(false) }}"
   service: docker
   ansible:
     package: python-docker
