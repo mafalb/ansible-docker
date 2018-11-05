@@ -37,9 +37,13 @@
 
     - package_facts:
 
+    - debug: var=docker.assume_already_installed
+      tags:
+        - never
+        - debug
     - assert:
         that:
-        - docker.assume_already_installed|bool
+        - docker.assume_already_installed == 'true'
         - ansible_facts.packages['docker-ce'] is defined
       when:
       - ansible_env.TRAVIS
