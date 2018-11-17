@@ -18,7 +18,7 @@ install:
   - pwd
   - sudo ln -s $TRAVIS_BUILD_DIR /etc/ansible/roles/mafalb.docker
 script:
-  - ansible-playbook --become -D tests/test.yml -C -t all,debug
-  - ansible-playbook --become -D tests/test.yml    -t all,debug
-after_script:
-  - docker version
+  - ansible-playbook -t all,debug -bD tests/test.yml -C
+  - ansible-playbook -t all,debug -bD tests/test.yml
+  - ansible-playbook -t all,debug -bD tests/test.yml | tee /tmp/idempotence.tee
+  - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
