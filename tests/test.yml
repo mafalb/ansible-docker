@@ -13,11 +13,13 @@
 
     - name: get version of docker clientx
       check_mode: false
+      changed_when: false
       command: docker version -f {% raw %} "{{ .Client.Version }}" {% endraw %}
       register: _docker_version
 
     - name: get version of docker daemon
       check_mode: false
+      changed_when: false
       command: docker version -f {% raw %} "{{ .Server.Version }}" {% endraw %}
       register: _dockerd_version
 

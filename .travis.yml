@@ -12,6 +12,7 @@ before_install:
   - sudo apt-get install ansible && sudo mkdir -p /etc/ansible/roles
   - sudo echo -e "[defaults]\nhash_behaviour = merge\n" | sudo tee /etc/ansible/ansible.cfg
   - sudo echo -e "localhost ansible_connection=local\n" | sudo tee /etc/ansible/hosts
+  - export ANSIBLE_CI_BRANCH=$TRAVIS_BRANCH CI_BUILD_DIR=$TRAVIS_BUILD_DIR ANSIBLE_FORCE_COLOR=1 CI=travis
   - ansible localhost -m setup
   - ansible --version
 install:
