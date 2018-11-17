@@ -2,4 +2,4 @@
 ---
 
 docker:
-  package: "docker.io"
+  package: "{{docker_package|default('docker.io') }}"
