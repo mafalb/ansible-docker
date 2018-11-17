@@ -11,7 +11,7 @@ before_install:
   - sudo apt-get install ansible
   - export ANSIBLE_CI_BRANCH=$TRAVIS_BRANCH CI_BUILD_DIR=$TRAVIS_BUILD_DIR ANSIBLE_FORCE_COLOR=1 CI=travis
   - ansible localhost -m setup
-  - sudo git clone git@github.com:mafalb/ci --recurse-submodules /etc/ansible/roles/mafalb.ci
+  - sudo git clone https:/github.com/mafalb/ci --recurse-submodules /etc/ansible/roles/mafalb.ci
   - ansible -b -D -t all,debug /etc/ansible/roles/mafalb.ci/before_install.yml
 install:
   - ansible -b -D -t all,debug /etc/ansible/roles/mafalb.ci/install.yml
