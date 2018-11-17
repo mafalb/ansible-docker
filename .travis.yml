@@ -6,7 +6,6 @@ before_install:
   - env
   - dpkg -l
   - pip list
-  - docker --version
   - sudo apt-add-repository --yes ppa:ansible/ansible-2.7
   - sudo apt-get update
   - sudo apt-get install ansible && sudo mkdir -p /etc/ansible/roles
@@ -14,9 +13,7 @@ before_install:
   - sudo echo -e "localhost ansible_connection=local\n" | sudo tee /etc/ansible/hosts
   - export ANSIBLE_CI_BRANCH=$TRAVIS_BRANCH CI_BUILD_DIR=$TRAVIS_BUILD_DIR ANSIBLE_FORCE_COLOR=1 CI=travis
   - ansible localhost -m setup
-  - ansible --version
 install:
-  - pwd
   - sudo ln -s $TRAVIS_BUILD_DIR /etc/ansible/roles/mafalb.docker
 script:
   - ansible-playbook -t all,debug -bD tests/test.yml -C
