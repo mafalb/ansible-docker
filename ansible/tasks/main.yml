@@ -8,7 +8,7 @@
     state: "{{ docker.ansible.package|ternary('present','absent') }}"
 
 # this is a dirty hack for ubuntu xenial 16
-- name: python-docker does exist
+- name: python-docker does not exist
   when: not docker.ansible.package
   pip:
     name: docker
