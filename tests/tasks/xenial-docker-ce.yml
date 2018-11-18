@@ -1,0 +1,14 @@
+# vim: set ft=yaml ts=2:
+---
+
+- name: get version of docker clientx
+  check_mode: true
+  package:
+    name: docker-ce
+    state: present
+  register: _docker_package
+
+- name: check docker version
+  assert:
+    that:
+      - not _docker_package.changed
