@@ -14,8 +14,8 @@
 
 - name: create docker container a second time
   docker_container:
-    name: idempotence
-    image: idempotence_image
+    name: testnode
+    image: alpine
   register: _docker_container
 
 - name: docker_container is idempotent
