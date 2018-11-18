@@ -6,3 +6,10 @@
   package:
     name: "{{ docker.ansible.package }}"
     state: present
+
+# this is a dirty hack for ubuntu xenial 16
+- name: python-docker does exist
+  when: not docker.ansible.package
+  pip:
+    name: docker
+    state: present
