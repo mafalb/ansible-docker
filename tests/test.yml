@@ -42,6 +42,7 @@
         name: xenial
         ansible_connection: docker
         ansible_python_interpreter: python3
+        ansible_become: false
 
     - name: get version of docker daemon
       check_mode: false
