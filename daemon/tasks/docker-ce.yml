@@ -6,6 +6,11 @@
     that:
       - ansible_distribution == "Ubuntu"
 
+- name: dockers gpg key does exist
+  apt_key:
+    data: "{{ lookup('file', 'docker-ce.asc') }}"
+    state: present
+
 - name: docker repo does exist
   when: ansible_distribution == "Ubuntu"
   apt_repository:
