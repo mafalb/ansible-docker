@@ -20,3 +20,5 @@ script:
   - ansible-playbook -t all,debug -bD tests/test.yml
   - ansible-playbook -t all,debug -bD tests/test.yml | tee /tmp/idempotence.tee
   - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
+after_script:
+  - sudo docker ps -a
