@@ -16,7 +16,6 @@ before_install:
 install:
   - ansible-playbook -b -D -t all,debug /etc/ansible/roles/mafalb.ci/install.yml
 script:
-  - ansible-playbook -t all,debug -bD tests/test.yml -C
   - ansible-playbook -t all,debug -bD tests/test.yml
   - ansible-playbook -t all,debug -bD tests/test.yml | tee /tmp/idempotence.tee
   - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
