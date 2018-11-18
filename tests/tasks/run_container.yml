@@ -5,17 +5,13 @@
   docker_container:
     name: testnode
     image: alpine
-  register: _docker_container
-
-- name: docker_container has changed
-  assert:
-    that:
-      - _docker_container.changed
+    tty: true
 
 - name: create docker container a second time
   docker_container:
     name: testnode
     image: alpine
+    tty: true
   register: _docker_container
 
 - name: docker_container is idempotent
