@@ -5,11 +5,11 @@
   when: docker.ansible.package
   package:
     name: "{{ docker.ansible.package }}"
-    state: present
+    state: "{{ docker.ansible.package|ternary('present','absent') }}"
 
 # this is a dirty hack for ubuntu xenial 16
 - name: python-docker does exist
   when: not docker.ansible.package
   pip:
     name: docker
-    state: "{{ docker.ansible.package|ternary('present','absent') }}"
+    state: present
