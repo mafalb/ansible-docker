@@ -23,7 +23,7 @@
       include_role:
         name: mafalb.docker/tests
         tasks_from: run_container
-        :
+
     - name: get version of docker clientx
       check_mode: false
       changed_when: false
@@ -41,6 +41,7 @@
       add_host:
         name: xenial
         ansible_connection: docker
+        ansible_python_interpreter: python3
 
     - name: get version of docker daemon
       check_mode: false
@@ -75,6 +76,10 @@
         - ansible_facts.packages['docker-ce'] is defined
       when:
       - ansible_env.TRAVIS
+
+- hosts: xenial
+  tasks:
+    raw: apt-get install -y python3
 
 - hosts: xenial
   roles:
