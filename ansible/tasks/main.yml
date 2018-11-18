@@ -2,6 +2,7 @@
 ---
 
 - name: python-docker does exist
+  when: docker.ansible.package
   package:
     name: "{{ docker.ansible.package }}"
     state: present
