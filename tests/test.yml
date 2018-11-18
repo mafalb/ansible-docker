@@ -82,6 +82,8 @@
   gather_facts: false
   tasks:
     - name: install python3
+      raw: apt-get update
+    - name: install python3
       raw: apt-get install -y python3
 
 - hosts: xenial
