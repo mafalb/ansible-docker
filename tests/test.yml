@@ -79,7 +79,8 @@
 
 - hosts: xenial
   tasks:
-    raw: apt-get install -y python3
+    - name: install python3
+      raw: apt-get install -y python3
 
 - hosts: xenial
   roles:
