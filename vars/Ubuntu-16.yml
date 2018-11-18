@@ -3,4 +3,7 @@
 
 docker:
   ansible:
-    package: "{{ (ansible_python.version.major|int == 3)|ternary('python3-docker','python-docker') }}"
+    # the python-docker package does not work, running containers is not idempotent on xenial
+    # package: "{{ (ansible_python.version.major|int == 3)|ternary('python3-docker','python-docker') }}"
+    package: false
+
