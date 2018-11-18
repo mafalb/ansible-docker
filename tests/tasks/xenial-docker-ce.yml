@@ -1,7 +1,7 @@
 # vim: set ft=yaml ts=2:
 ---
 
-- name: get version of docker clientx
+- name: get version of docker client
   check_mode: true
   package:
     name: docker-ce

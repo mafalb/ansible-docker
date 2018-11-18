@@ -24,7 +24,7 @@
         name: mafalb.docker/tests
         tasks_from: run_container
 
-    - name: get version of docker clientx
+    - name: get version of docker client
       changed_when: false
       command: docker version -f {% raw %} "{{ .Client.Version }}" {% endraw %}
       register: _docker_version
@@ -87,7 +87,7 @@
 
 - hosts: xenial
   roles:
-    - role: mafalb.docker
+    - role: mafalb.docker/daemon
       docker_package: docker-ce
   tasks:
     - name: check docker-ce on ubuntu xenial
