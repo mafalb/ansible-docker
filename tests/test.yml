@@ -81,8 +81,10 @@
   gather_facts: false
   tasks:
     - name: apt-get update
+      changed_when: false
       raw: apt-get update
     - name: install python3
+      changed_when: false
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
