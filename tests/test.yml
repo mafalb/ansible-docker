@@ -82,7 +82,7 @@
   tasks:
     - name: install python3
       raw: apt-get update
-    - name: install python3
+    - name: install python3-apt
       raw: apt-get install -y python3
 
 - hosts: xenial
