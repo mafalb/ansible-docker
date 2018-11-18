@@ -83,7 +83,7 @@
     - name: apt-get update
       raw: apt-get update
     - name: install python3
-      raw: apt-get install -y python3-apt
+      raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
   roles:
