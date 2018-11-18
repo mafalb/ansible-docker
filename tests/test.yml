@@ -8,8 +8,21 @@
     - role: mafalb.docker/daemon
     - role: mafalb.docker/ansible
   tasks:
-    - name: create image
-      debug: msg="tbd"
+
+    - name: check LICENSE file
+      include_role:
+        name: mafalb.docker/tests
+        tasks_from: license
+
+    - name: check README file
+      include_role:
+        name: mafalb.ansible_ci/tests
+        tasks_from: readme
+
+    - name: check that container runs are idempotent
+      include_role:
+        name: mafalb.ansible_ci/tests
+        tasks_from: run_container
 
     - name: get version of docker clientx
       check_mode: false

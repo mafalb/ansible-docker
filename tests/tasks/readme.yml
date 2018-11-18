@@ -1,0 +1,13 @@
+# vim: set ft=yaml ts=2:
+---
+
+- name: README file does exist
+  stat:
+    path: "{{ ansible_env.CI_BUILD_DIR }}/README.md"
+  register: _README
+
+- name: "assert || README"
+  assert:
+    that:
+      - _README.stat.exists
+      - _README.stat.size|int > 200

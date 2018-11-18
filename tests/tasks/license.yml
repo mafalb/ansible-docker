@@ -1,0 +1,14 @@
+# vim: set ft=yaml ts=2:
+---
+
+- name: LICENSE file does exist
+  stat:
+    path: "{{ ansible_env.CI_BUILD_DIR }}/LICENSE"
+  register: _LICENSE
+
+- name: "assert || LICENSE"
+  assert:
+    that:
+      - _LICENSE.stat.exists
+      - _LICENSE.stat.size|int > 100
+
