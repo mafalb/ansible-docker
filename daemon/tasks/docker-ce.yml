@@ -8,7 +8,7 @@
 
 - name: dockers gpg key does exist
   apt_key:
-    data: "{{ lookup('file', 'docker-ce.asc') }}"
+    data: "{{ lookup('file', 'docker-ce.gpg') }}"
     state: present
 
 - name: docker repo does exist
