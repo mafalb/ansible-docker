@@ -34,29 +34,21 @@
         - python3_hosts
 
 - hosts: xenial
-  gather_facts: false
-  pre_tasks:
-    - name: apt-get update
-      changed_when: false
-      raw: apt-get update
-    - name: install python3
-      changed_when: false
-      raw: apt-get install -y python3-apt apt-transport-https
-
-- hosts: xenial
   gather_facts: true
   roles:
     - role: mafalb.docker/daemon
       docker_package: docker-ce
+
   tasks:
     - name: check docker-ce on ubuntu xenial
       include_role:
         name: mafalb.docker/tests
         tasks_from: xenial-docker-ce
+
     - name: assertions
+      when:
+        - ansible_env.CI == 'travis'
       assert:
         that:
         - docker.assume_already_installed
         - ansible_facts.packages['docker-ce'] is defined
-      when:
-      - ansible_env.CI == 'travis'
