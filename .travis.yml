@@ -22,10 +22,10 @@ before_install:
   - ansible --version
   - ansible localhost -m setup
   - ansible-galaxy install -g -r tests/requirements.yml -p roles
-  - ls -lR
   - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/before_install.yml -i cihost, -c local
+  - ls -lR
 install:
-  - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/install.yml
+  - ansible-playbook -D -t all,debug roles/mafalb.ansible_ci/install.yml
 script:
   - ansible-playbook -t all,debug -bD tests/test.yml
   - ansible-playbook -t all,debug -bD tests/test.yml | tee /tmp/idempotence.tee
