@@ -1,30 +1,6 @@
 # vi: set ft=yaml ts=2:
 ---
 
-- hosts: cihost
-  vars:
-    - docker_assume_already_installed: true
-  roles:
-    - role: mafalb.docker/daemon
-    - role: mafalb.docker/ansible
-    - role: mafalb.docker/tests
-  tasks:
-
-    - name: check LICENSE file
-      include_role:
-        name: mafalb.docker/tests
-        tasks_from: license
-
-    - name: check README file
-      include_role:
-        name: mafalb.docker/tests
-        tasks_from: readme
-
-    - name: check that container runs are idempotent
-      include_role:
-        name: mafalb.docker/tests
-        tasks_from: run_container
-
 - name: create a ubuntu xenial container
   hosts: cihost
   roles:
@@ -48,13 +24,20 @@
     - role: mafalb.docker/daemon
       docker_package: docker-ce
   tasks:
-    - name: check docker-ce on ubuntu xenial
-      include_role:
-        name: mafalb.docker/tests
-        tasks_from: xenial-docker-ce
     - assert:
         that:
         - docker.assume_already_installed
         - ansible_facts.packages['docker-ce'] is defined
       when:
       - ansible_env.TRAVIS
+    - name: get version of docker client
+      check_mode: true
+      package:
+        name: docker-ce
+        state: present
+      register: _docker_package
+
+    - name: check docker version
+      assert:
+        that:
+          - not _docker_package.changed
