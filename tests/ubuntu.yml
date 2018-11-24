@@ -83,7 +83,7 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
-  python_interpreter
+  python_interpreter: python3
   gather_facts: true
   tasks:
     - name: assert that the file does exist
