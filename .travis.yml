@@ -27,8 +27,12 @@ before_install:
 install:
   - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/install.yml
 script:
-  - ansible-playbook -t all,debug -bD tests/test.yml
-  - ansible-playbook -t all,debug -bD tests/idempotency.yml | tee /tmp/idempotence.tee
+  - ansible-lint --force-color -v tests/test.yml
+  - ansible-lint --force-color -v tests/ubuntu.yml
+  - ansible-lint --force-color -v tests/idempotency.yml
+  - ansible-playbook -t all,debug -D tests/test.yml
+  - ansible-playbook -t all,debug -D tests/ubuntu.yml
+  - ansible-playbook -t all,debug -D tests/idempotency.yml | tee /tmp/idempotence.tee
   - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
 after_script:
   - ls -lR

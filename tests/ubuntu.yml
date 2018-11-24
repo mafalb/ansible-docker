@@ -20,6 +20,8 @@
     - name: install python3
       changed_when: false
       raw: apt-get install -y python3-apt apt-transport-https
+
+- hosts: xenial
   roles:
     - role: mafalb.docker/daemon
       docker_package: docker-ce
@@ -41,3 +43,35 @@
       assert:
         that:
           - not _docker_package.changed
+    - name: debug variables
+      assert:
+        that:
+          - ansible_distribution == 'CentOS'
+
+    - name: create a file
+      copy:
+        content: bla
+        dest: /tmp/bla
+
+    - name: assert that the file does exist
+      file:
+        path: /tmp/bla
+        state: file
+
+- name: create a ubuntu xenial container
+  hosts: cihost
+  roles:
+    - role: mafalb.ansible_ci/node/docker
+      container_name: xenial
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      image_name: centos_image1
+      src: ubuntu-16
+      recreate: true
+
+- hosts: xenial
+  tasks:
+    - name: assert that the file does exist
+      file:
+        path: /tmp/bla
+        state: absent
