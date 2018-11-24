@@ -7,6 +7,15 @@ docker:
       - container_name: xenial
         container_image: xenial_image 
         src: ubuntu-16
+        python_interpreter: python3
+        volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        groups:
+          - testnodes
+          - python3_hosts
+
       - container_name: centos-7
         container_image: centos-7-image
         src: centos-7
+        volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro

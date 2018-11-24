@@ -4,6 +4,7 @@
 - name: create a ubuntu xenial container
   hosts: cihost
   roles:
+    - role: mafalb.ansible/tests
     - role: mafalb.ansible_ci/node/docker
       container_name: xenial
       volumes:

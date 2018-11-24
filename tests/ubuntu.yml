@@ -4,15 +4,18 @@
 - name: create a ubuntu xenial container
   hosts: cihost
   roles:
+    - role: mafalb.docker/tests
     - role: mafalb.ansible_ci/node/docker
       container_name: xenial
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       image_name: centos_image1
       src: ubuntu-16
+      groups:
+        - testnodes
+        - python3_hosts
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: false
   pre_tasks:
     - name: apt-get update
@@ -23,7 +26,6 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: true
   tasks:
     - name: assertions
@@ -70,9 +72,11 @@
       image_name: centos_image1
       src: ubuntu-16
       recreate: true
+      groups:
+        - testnodes
+        - python3_hosts
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: false
   pre_tasks:
     - name: apt-get update
@@ -83,7 +87,6 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: true
   tasks:
     - name: assert that the file does exist

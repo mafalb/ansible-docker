@@ -29,9 +29,11 @@
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       image_name: centos_image1
       src: ubuntu-16
+      groups:
+        - testnodes
+        - python3_hosts
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: false
   pre_tasks:
     - name: apt-get update
