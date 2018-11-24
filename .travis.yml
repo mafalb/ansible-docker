@@ -20,7 +20,6 @@ before_install:
   - pip list
   - ansible --version
   - ansible localhost -m setup
-    #- sudo git clone -b dev https://github.com/mafalb/ci --recurse-submodules /etc/ansible/roles/mafalb.ci
   - ansible-galaxy install -g -r tests/requirements.yml -p roles
   - ls -lR
   - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/before_install.yml -i cihost, -c local
