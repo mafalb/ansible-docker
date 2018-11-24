@@ -1,0 +1,14 @@
+# vim: set ft=yaml ts=2:
+---
+
+- name: create a ubuntu xenial container
+  hosts: cihost
+  roles:
+    - role: ansible_ci/node/docker
+      container_name: xenial
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      image_name: centos_image1
+      src: ubuntu-16
+
+...

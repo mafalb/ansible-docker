@@ -25,70 +25,25 @@
         name: mafalb.docker/tests
         tasks_from: run_container
 
-    - name: get version of docker client
-      changed_when: false
-      command: docker version -f {% raw %} "{{ .Client.Version }}" {% endraw %}
-      register: _docker_version
-
-    - name: create docker container
-      docker_container:
-        name: xenial
-        image: ubuntu:xenial
-        tty: true
-
-    - name: add xenial to inventory
-      changed_when: false
-      add_host:
-        name: xenial
-        ansible_connection: docker
-        ansible_python_interpreter: python3
-        ansible_become: false
-
-    - name: get version of docker daemon
-      check_mode: false
-      changed_when: false
-      command: docker version -f {% raw %} "{{ .Server.Version }}" {% endraw %}
-      register: _dockerd_version
-
-    - debug: var=_docker_version
-      tags:
-        - never
-        - debug
-
-    - debug: var=_dockerd_version
-      tags:
-        - never
-        - debug
-
-    - name: assert that docker and dockerd versions match
-      assert:
-        that:
-          - _docker_version.stdout == _dockerd_version.stdout
-
-    - package_facts:
-
-    - debug: var=docker.assume_already_installed
-      tags:
-        - never
-        - debug
-    - assert:
-        that:
-        - docker.assume_already_installed
-        - ansible_facts.packages['docker-ce'] is defined
-      when:
-      - ansible_env.TRAVIS
+- name: create a ubuntu xenial container
+  hosts: cihost
+  roles:
+    - role: ansible_ci/node/docker
+      container_name: xenial
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      image_name: centos_image1
+      src: ubuntu-16
 
 - hosts: xenial
   gather_facts: false
-  tasks:
+  pre_tasks:
     - name: apt-get update
       changed_when: false
       raw: apt-get update
     - name: install python3
       changed_when: false
       raw: apt-get install -y python3-apt apt-transport-https
-
-- hosts: xenial
   roles:
     - role: mafalb.docker/daemon
       docker_package: docker-ce
@@ -97,4 +52,9 @@
       include_role:
         name: mafalb.docker/tests
         tasks_from: xenial-docker-ce
-
+    - assert:
+        that:
+        - docker.assume_already_installed
+        - ansible_facts.packages['docker-ce'] is defined
+      when:
+      - ansible_env.TRAVIS
