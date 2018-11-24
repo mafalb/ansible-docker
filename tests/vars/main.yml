@@ -1,0 +1,12 @@
+# vim: ft=yaml ts=2:
+---
+
+docker:
+  tests:
+    containers:
+      - container_name: xenial
+        container_image: xenial_image 
+        src: ubuntu-16
+      - container_name: centos-7
+        container_image: centos-7-image
+        src: centos-7

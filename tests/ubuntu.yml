@@ -12,6 +12,7 @@
       src: ubuntu-16
 
 - hosts: xenial
+  python_interpreter: python3
   gather_facts: false
   pre_tasks:
     - name: apt-get update
@@ -22,6 +23,7 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
+  python_interpreter: python3
   gather_facts: true
   tasks:
     - name: assertions
@@ -70,6 +72,7 @@
       recreate: true
 
 - hosts: xenial
+  python_interpreter: python3
   gather_facts: false
   pre_tasks:
     - name: apt-get update
@@ -80,6 +83,7 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
+  python_interpreter
   gather_facts: true
   tasks:
     - name: assert that the file does exist
