@@ -44,7 +44,6 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
-  python_interpreter: python3
   gather_facts: true
   roles:
     - role: mafalb.docker/daemon

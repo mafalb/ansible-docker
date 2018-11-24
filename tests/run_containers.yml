@@ -7,10 +7,12 @@
   roles:
     - role: mafalb.docker/tests
   tasks:
-    - include_role: mafalb.ansible_ci/node/docker
-      with_items: "{{ docker.tests.containers }}"
-      container_name: "{{ item.container_name }}"
-      volumes: "{{ item.volumes }}"
-      image_name: "{{ item.image_name }}"
-      src: "{{ item.src }}"
-      groups: "{{ item.groups }}"
+    - include_role:
+      name: mafalb.ansible_ci/node/docker
+      vars:
+        with_items: "{{ docker.tests.containers }}"
+        container_name: "{{ item.container_name }}"
+        volumes: "{{ item.volumes }}"
+        image_name: "{{ item.image_name }}"
+        src: "{{ item.src }}"
+        groups: "{{ item.groups }}"
