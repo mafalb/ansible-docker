@@ -52,7 +52,8 @@
       include_role:
         name: mafalb.docker/tests
         tasks_from: xenial-docker-ce
-    - assert:
+    - name: assertions
+      assert:
         that:
         - docker.assume_already_installed
         - ansible_facts.packages['docker-ce'] is defined

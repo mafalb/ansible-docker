@@ -22,11 +22,9 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
-  roles:
-    - role: mafalb.docker/daemon
-      docker_package: docker-ce
   tasks:
-    - assert:
+    - name: assertions
+      assert:
         that:
         - docker.assume_already_installed
         - ansible_facts.packages['docker-ce'] is defined
@@ -58,7 +56,7 @@
         path: /tmp/bla
         state: file
 
-- name: create a ubuntu xenial container
+- name: recreate a ubuntu xenial container
   hosts: cihost
   roles:
     - role: mafalb.ansible_ci/node/docker
@@ -68,6 +66,16 @@
       image_name: centos_image1
       src: ubuntu-16
       recreate: true
+
+- hosts: xenial
+  gather_facts: false
+  pre_tasks:
+    - name: apt-get update
+      changed_when: false
+      raw: apt-get update
+    - name: install python3
+      changed_when: false
+      raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
   tasks:
