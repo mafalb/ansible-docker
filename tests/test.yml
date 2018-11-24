@@ -1,12 +1,13 @@
 # vi: set ft=yaml ts=2:
 ---
 
-- hosts: localhost
+- hosts: cihost
   vars:
     - docker_assume_already_installed: true
   roles:
     - role: mafalb.docker/daemon
     - role: mafalb.docker/ansible
+    - role: mafalb.docker/tests
   tasks:
 
     - name: check LICENSE file

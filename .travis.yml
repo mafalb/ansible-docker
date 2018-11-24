@@ -1,20 +1,30 @@
+# vim: set ft=yaml ts=2:
 ---
-sudo: required
+
 dist: xenial
 language: minimal
+env:
+  global:
+    - ANSIBLE_ROLE_NAME=mafalb.docker
+    - CI=travis
+    - ANSIBLE_FORCE_COLOR=1
+  matrix:
+    - targeted_ansible_version: 2.7
 before_install:
+  - export ANSIBLE_CI_BRANCH=$TRAVIS_BRANCH CI_BUILD_DIR=$TRAVIS_BUILD_DIR
   - env
+  - sudo apt-add-repository --yes ppa:ansible/ansible-${targeted_ansible_version} && sudo apt-get update
+  - sudo apt-get install ansible
+  - sudo pip install ansible-lint
   - dpkg -l
   - pip list
-  - sudo apt-add-repository --yes ppa:ansible/ansible-2.7
-  - sudo apt-get update
-  - sudo apt-get install ansible
-  - export ANSIBLE_CI_BRANCH=$TRAVIS_BRANCH CI_BUILD_DIR=$TRAVIS_BUILD_DIR ANSIBLE_FORCE_COLOR=1 CI=travis
+  - ansible --version
   - ansible localhost -m setup
-  - sudo git clone -b dev https://github.com/mafalb/ci --recurse-submodules /etc/ansible/roles/mafalb.ci
-  - ansible-playbook -b -D -t all,debug /etc/ansible/roles/mafalb.ci/before_install.yml
+    #- sudo git clone -b dev https://github.com/mafalb/ci --recurse-submodules /etc/ansible/roles/mafalb.ci
+  - ansible-galaxy install -g -r tests/requirements.yml -p roles
+  - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/before_install.yml -i cihost, -c local
 install:
-  - ansible-playbook -b -D -t all,debug /etc/ansible/roles/mafalb.ci/install.yml
+  - ansible-playbook -b -D -t all,debug roles/mafalb.ansible_ci/install.yml
 script:
   - ansible-playbook -t all,debug -bD tests/test.yml
   - ansible-playbook -t all,debug -bD tests/test.yml | tee /tmp/idempotence.tee
