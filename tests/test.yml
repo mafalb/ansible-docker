@@ -44,6 +44,9 @@
     - name: install python3
       changed_when: false
       raw: apt-get install -y python3-apt apt-transport-https
+
+- hosts: xenial
+  gather_facts: true
   roles:
     - role: mafalb.docker/daemon
       docker_package: docker-ce

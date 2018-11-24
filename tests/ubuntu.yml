@@ -22,6 +22,7 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
+  gather_facts: true
   tasks:
     - name: assertions
       assert:
@@ -30,6 +31,7 @@
         - ansible_facts.packages['docker-ce'] is defined
       when:
       - ansible_env.TRAVIS
+
     - name: get version of docker client
       check_mode: true
       package:
@@ -78,6 +80,7 @@
       raw: apt-get install -y python3-apt apt-transport-https
 
 - hosts: xenial
+  gather_facts: true
   tasks:
     - name: assert that the file does exist
       file:
