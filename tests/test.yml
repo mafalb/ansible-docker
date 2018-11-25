@@ -19,24 +19,3 @@
       include_role:
         name: mafalb.docker/tests
         tasks_from: readme
-
-- hosts: xenial
-  gather_facts: true
-  roles:
-    - role: mafalb.docker/daemon
-      docker_package: docker-ce
-
-  tasks:
-    - name: check docker-ce on ubuntu xenial
-      include_role:
-        name: mafalb.docker/tests
-        tasks_from: xenial-docker-ce
-
-    - name: assertions
-      when:
-        - ansible_env.CI is defined
-        - ansible_env.CI == 'travis'
-      assert:
-        that:
-        - docker.assume_already_installed
-        - ansible_facts.packages['docker-ce'] is defined

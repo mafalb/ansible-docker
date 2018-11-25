@@ -30,6 +30,7 @@ script:
   - ansible-lint --force-color -v tests/test.yml
   - ansible-lint --force-color -v tests/run_containers.yml
   - ansible-lint --force-color -v tests/recreate_containers.yml
+  - ansible-lint --force-color -v tests/docker-ce.yml
   - ansible-lint --force-color -v tests/idempotency.yml
 
   - ansible-playbook -t all,debug -D tests/run_containers.yml
@@ -38,6 +39,10 @@ script:
 
   - ansible-playbook -t all,debug -D tests/recreate_containers.yml
 
+  - ansible-playbook -t all,debug -D tests/docker-ce.yml
+  - ansible-playbook -t all,debug -D tests/docker-ce.yml | tee /tmp/idempotency.tee
+  - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
+  
   - ansible-playbook -t all,debug -D tests/test.yml
 
   - ansible-playbook -t all,debug -D tests/idempotency.yml | tee /tmp/idempotence.tee
