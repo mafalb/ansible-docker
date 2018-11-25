@@ -47,6 +47,7 @@
 
     - name: assertions
       when:
+        - ansible_env.CI is defined
         - ansible_env.CI == 'travis'
       assert:
         that:
