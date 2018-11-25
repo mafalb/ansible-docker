@@ -4,3 +4,4 @@
 
 - name: mafalb.ansible
   src: https://github.com/mafalb/ansible-ansible
+  branch: origin/dev
