@@ -10,7 +10,7 @@ docker:
         python_interpreter: python3
         volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-        groups:
+        hostgroups:
           - testnodes
           - python3_hosts
 
