@@ -9,7 +9,7 @@ docker:
         src: ubuntu-16
         volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-        hostgroups:
+        member_of_groups:
           - testnodes
           - python3_hosts
 
@@ -18,5 +18,5 @@ docker:
         src: centos-7
         volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-        hostgroups:
+        member_of_groups:
           - testnodes

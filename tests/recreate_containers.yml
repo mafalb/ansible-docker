@@ -15,7 +15,7 @@
         volumes: "{{ item.volumes }}"
         image_name: "{{ item.image_name }}"
         src: "{{ item.src }}"
-        hostgroups: "{{ item.groups }}"
+        member_of_groups: "{{ item.member_of_groups }}"
         recreate: true
 
 - name: modify containers
