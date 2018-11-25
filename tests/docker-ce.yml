@@ -17,7 +17,7 @@
         image_name: "{{ item.image_name }}"
         src: "{{ item.src }}"
         member_of_groups: "{{ item.member_of_groups }}"
-        recreate: true
+        recreate: "{{ recreate|default(true) }}"
 
 - name: install docker-ce
   hosts: ubuntu
