@@ -19,6 +19,7 @@
   package:
     name: "{{ docker.package }}"
     state: present
+    cache_valid_time: 86400
 
 - name: docker service is running
   when: not ansible_virtualization_type == 'docker'
