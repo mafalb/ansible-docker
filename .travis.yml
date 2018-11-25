@@ -41,11 +41,11 @@ script:
   - ansible-playbook -t all,debug -D tests/recreate_containers.yml
 
   - ansible-playbook -t all,debug -D tests/docker.yml
-  - ansible-playbook -t all,debug -D tests/docker.yml -e "recreate=false" | tee /tmp/idempotency.tee
+  - ansible-playbook -t all,debug -D tests/docker.yml -e "recreate_containers=false" | tee /tmp/idempotency.tee
   - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
 
   - ansible-playbook -t all,debug -D tests/docker-ce.yml
-  - ansible-playbook -t all,debug -D tests/docker-ce.yml -e "recreate=false" | tee /tmp/idempotency.tee
+  - ansible-playbook -t all,debug -D tests/docker-ce.yml -e "recreate_containers=false" | tee /tmp/idempotency.tee
   - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotency.tee"
   
 after_script:

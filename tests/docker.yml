@@ -17,7 +17,7 @@
         image_name: "{{ item.image_name }}"
         src: "{{ item.src }}"
         member_of_groups: "{{ item.member_of_groups }}"
-        recreate: "{{ recreate|default(true) }}"
+        recreate: "{{ recreate_containers|default(true) }}"
 
 - name: install docker on ubuntu
   hosts: ubuntu
