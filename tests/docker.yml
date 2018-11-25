@@ -23,7 +23,7 @@
   hosts: ubuntu
   pre_tasks:
     - apt:
-        update_cache: true
+        cache_valid_time: 86400
 
   roles:
     - role: mafalb.docker/daemon
