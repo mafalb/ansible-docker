@@ -18,7 +18,8 @@
         - never
         - debug
 
-    - include_role:
+    - name: run container {{ item.container_name }}
+      include_role:
         name: mafalb.ansible_ci/node/docker
       with_items: "{{ docker.tests.containers }}"
       vars:
