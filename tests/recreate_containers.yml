@@ -16,15 +16,12 @@
         image_name: "{{ item.image_name }}"
         src: "{{ item.src }}"
         hostgroups: "{{ item.groups }}"
+        recreate: true
 
 - name: modify containers
   hosts: testnodes
   tasks:
-    - name: create a file
-      copy:
-        content: bla
-        dest: /tmp/bla
-    - name: assert the file does exist:
+    - name: assert that the file does exist
       file:
         path: /tmp/bla
-        state: file
+        state: absent
