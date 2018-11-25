@@ -1,5 +1,6 @@
 - name: mafalb.ansible_ci
   src: https://github.com/mafalb/ansible-ansible_ci
+  branch: origin/dev
 
 - name: mafalb.ansible
   src: https://github.com/mafalb/ansible-ansible
