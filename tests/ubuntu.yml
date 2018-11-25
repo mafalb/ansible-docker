@@ -11,7 +11,7 @@
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       image_name: centos_image1
       src: ubuntu-16
-      groups:
+      hostgroups:
         - testnodes
         - python3_hosts
 
@@ -72,7 +72,7 @@
       image_name: centos_image1
       src: ubuntu-16
       recreate: true
-      groups:
+      hostgroups:
         - testnodes
         - python3_hosts
 

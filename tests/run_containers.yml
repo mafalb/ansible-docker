@@ -15,4 +15,4 @@
         volumes: "{{ item.volumes }}"
         image_name: "{{ item.image_name }}"
         src: "{{ item.src }}"
-        groups: "{{ item.groups }}"
+        hostgroups: "{{ item.groups }}"
