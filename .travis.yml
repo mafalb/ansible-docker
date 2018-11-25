@@ -46,7 +46,7 @@ script:
 
   - ansible-playbook -t all,debug -D tests/docker-ce.yml
   - ansible-playbook -t all,debug -D tests/docker-ce.yml | tee /tmp/idempotency.tee
-  - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotence.tee"
+  - "! grep -E 'ok=.*changed=[^0].*unreachable=.*failed=' /tmp/idempotency.tee"
   
 after_script:
   - ls -lR
