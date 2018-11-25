@@ -14,6 +14,11 @@
   include_tasks:
     file: docker-ce.yml
 
+- name: include apt specific stuff if necessary
+  when: ansible_pkg_mgr == 'apt'
+  include_tasks:
+    file: apt.yml
+
 - name: docker daemon does exist
   when: not docker.assume_already_installed
   package:

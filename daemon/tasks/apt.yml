@@ -1,0 +1,7 @@
+# vim: set ft=yaml ts=2:
+---
+
+- name: the apt cache is not too old
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400

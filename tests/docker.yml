@@ -21,10 +21,6 @@
 
 - name: install docker on ubuntu
   hosts: ubuntu
-  pre_tasks:
-    - apt:
-        cache_valid_time: 86400
-
   roles:
     - role: mafalb.docker/daemon
 
