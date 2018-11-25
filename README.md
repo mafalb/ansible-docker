@@ -31,6 +31,12 @@ docker_package: docker.io
 
 The name of the package to be installed. This defaults to OS specific defaults but can be overruled, e.g. on debian-ish systems the docker package is named docker.io but you can set it to docker-ce and it will configure the docker ppa and install from there.
 
+```
+docker_package: docker.io
+```
+
+The name of the package to be installed. This defaults to OS specific defaults but can be overruled, e.g. on debian-ish systems the docker package is named docker.io but you can set it to docker-ce and it will configure the docker ppa and install from there.
+
 ## License
 
 GPLv3

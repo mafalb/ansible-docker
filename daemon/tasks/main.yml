@@ -8,11 +8,11 @@
     - debug
 
 - name: docker-ce repo does exist
+  when:
+    - not docker.assume_already_installed
+    - docker.package == "docker-ce"
   include_tasks:
     file: docker-ce.yml
-  when:
-    - docker.package == "docker-ce"
-    - not docker.assume_already_installed
 
 - name: docker daemon does exist
   when: not docker.assume_already_installed
@@ -21,6 +21,7 @@
     state: present
 
 - name: docker service is running
+  when: not ansible_virtualization_type == 'docker'
   service:
     name: "{{ docker.service }}"
     state: started

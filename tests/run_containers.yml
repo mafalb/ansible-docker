@@ -1,0 +1,43 @@
+# vi: set ft=yaml ts=2:
+---
+
+
+- name: create containers
+  hosts: cihost
+  roles:
+    - role: mafalb.docker/tests
+  tasks:
+    - debug: var=docker.tests.containers
+      tags:
+        - never
+        - debug
+
+    - debug: var=item
+      with_items: "{{ docker.tests.containers }}"
+      tags:
+        - never
+        - debug
+
+    - name: run container {{ item.container_name }}
+      include_role:
+        name: mafalb.ansible_ci/node/docker
+      with_items: "{{ docker.tests.containers }}"
+      vars:
+        container_name: "{{ item.container_name }}"
+        volumes: "{{ item.volumes }}"
+        image_name: "{{ item.image_name }}"
+        src: "{{ item.src }}"
+        member_of_groups: "{{ item.member_of_groups }}"
+
+- name: modify containers
+  hosts: testnodes
+  tasks:
+    - name: create a file
+      copy:
+        content: bla
+        dest: /tmp/bla
+
+    - name: assert the file does exist
+      file:
+        path: /tmp/bla
+        state: file

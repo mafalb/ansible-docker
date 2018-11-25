@@ -1,0 +1,21 @@
+# vim: ft=yaml ts=2:
+---
+
+docker:
+  tests:
+    containers:
+      - container_name: xenial
+        image_name: xenial_image 
+        src: ubuntu-16
+        volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro
+        member_of_groups:
+          - testnodes
+          - python3_hosts
+          - ubuntu
+
+      - container_name: centos-7
+        image_name: centos-7-image
+        src: centos-7
+        volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup:ro

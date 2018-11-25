@@ -1,0 +1,58 @@
+# vi: set ft=yaml ts=2:
+---
+
+
+- name: create containers
+  hosts: cihost
+  roles:
+    - role: mafalb.docker/tests
+  tasks:
+    - name: run container {{ item.container_name }}
+      include_role:
+        name: mafalb.ansible_ci/node/docker
+      with_items: "{{ docker.tests.containers }}"
+      vars:
+        container_name: "{{ item.container_name }}"
+        volumes: "{{ item.volumes }}"
+        image_name: "{{ item.image_name }}"
+        src: "{{ item.src }}"
+        member_of_groups: "{{ item.member_of_groups }}"
+        recreate: true
+
+- name: install docker on ubuntu
+  hosts: ubuntu
+  roles:
+    - role: mafalb.docker/daemon
+
+  tasks:
+    - name: get version of docker client
+      check_mode: true
+      changed_when: false
+      package:
+        name: docker.io
+        state: present
+      register: _docker_package
+
+    - name: check docker version
+      assert:
+        that:
+          - not _docker_package.changed
+
+- name: install docker
+  hosts: testnodes,!ubuntu
+  roles:
+    - role: mafalb.docker/daemon
+
+  tasks:
+    - name: get version of docker client
+      check_mode: true
+      changed_when: false
+      package:
+        name: docker
+        state: present
+      register: _docker_package
+
+    - name: check docker version
+      assert:
+        that:
+          - not _docker_package.changed
