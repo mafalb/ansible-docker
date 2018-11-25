@@ -16,7 +16,7 @@ before_install:
   - env
   - sudo apt-add-repository --yes ppa:ansible/ansible-${targeted_ansible_version} && sudo apt-get update
   - sudo apt-get install ansible
-  - sudo pip install ansible-lint
+  - sudo -H pip install ansible-lint
   - dpkg -l
   - pip list
   - ansible --version
