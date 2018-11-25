@@ -9,7 +9,7 @@
       container_name: xenial
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      image_name: centos_image1
+      image_name: xenial_image
       src: ubuntu-16
       hostgroups:
         - testnodes
@@ -69,7 +69,7 @@
       container_name: xenial
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      image_name: centos_image1
+      image_name: xenial_image
       src: ubuntu-16
       recreate: true
       hostgroups:
