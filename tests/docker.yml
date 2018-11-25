@@ -29,7 +29,7 @@
       check_mode: true
       changed_when: false
       package:
-        name: docker.io
+        name: 'docker.io'
         state: present
       register: _docker_package
 
