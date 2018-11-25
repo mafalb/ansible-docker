@@ -24,7 +24,8 @@
       copy:
         content: bla
         dest: /tmp/bla
-    - name: assert the file does exist:
+
+    - name: assert the file does exist
       file:
         path: /tmp/bla
         state: file
