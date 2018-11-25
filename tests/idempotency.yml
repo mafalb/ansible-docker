@@ -9,10 +9,11 @@
       container_name: xenial
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      image_name: xenial_image1
+      image_name: xenial_image
       src: ubuntu-16
       hostgroups:
         - python3_hosts
         - testnodes
+        - ubuntu
 
 ...
