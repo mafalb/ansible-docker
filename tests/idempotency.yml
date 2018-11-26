@@ -10,7 +10,7 @@
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
       image_name: xenial_image
-      src: ubuntu-16
+      src: ubuntu-16-python3
       hostgroups:
         - python3_hosts
         - testnodes
