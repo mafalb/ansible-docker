@@ -51,3 +51,4 @@ script:
 after_script:
   - ls -lR
   - sudo docker exec -t xenial ls -l /var/lib/apt/lists/
+  - cd roles/mafalb.ansible_ci && git branch
