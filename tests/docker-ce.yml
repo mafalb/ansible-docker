@@ -28,7 +28,6 @@
   tasks:
     - name: get version of docker client
       check_mode: true
-      changed_when: false
       package:
         name: docker-ce
         state: present
