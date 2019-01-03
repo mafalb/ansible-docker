@@ -28,7 +28,9 @@
   tasks:
     - name: get version of docker client
       check_mode: true
-      retries: 1
+      register: _version
+      until: _version is succeeded
+      retries: 0
       package:
         name: docker-ce
         state: present
