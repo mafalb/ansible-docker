@@ -28,13 +28,12 @@
   tasks:
     - name: get version of docker client
       check_mode: true
-      register: _version
-      until: _version is succeeded
       retries: 0
       package:
         name: docker-ce
         state: present
       register: _docker_package
+      until: _docker_package is succeeded
 
     - name: check docker version
       assert:
