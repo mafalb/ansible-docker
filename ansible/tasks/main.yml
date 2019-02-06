@@ -13,3 +13,4 @@
   pip:
     name: docker
     state: present
+    executable: "{{ (ansible_python.version.major|int == 3)|ternary('pip3','pip') }}"
